@@ -16,8 +16,8 @@ class PatientSeeder extends Seeder
     public function run()
     {
         DB::table('patients')->insert([
-            'user_id' => 2,
-            'status' => 'inactive',
+            'user_id' => 3,
+            'status' => 'active',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => NULL,
         ]);

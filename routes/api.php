@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PatientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
@@ -21,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
+// Route::post('forgot-password', [UserController::class, 'forgotPassword'])->middleware('guest');
+
+Route::get('all-patient', [PatientController::class, 'all']);
+Route::post('get-patient', [PatientController::class, 'getPatientById']);

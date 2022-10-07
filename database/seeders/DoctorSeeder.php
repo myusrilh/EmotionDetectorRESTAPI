@@ -15,12 +15,13 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('doctors')->insert([
-            'user_id' => 1,
-            'status' => 'active',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => NULL,
-        ]
-    );
+        DB::table('doctors')->insert(
+            [
+                'user_id' => 2,
+                'status' => 'active',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => NULL,
+            ]
+        );
     }
 }

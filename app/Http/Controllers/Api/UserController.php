@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 use Throwable;
 
 class UserController extends ApiController
@@ -37,8 +40,6 @@ class UserController extends ApiController
             return $this->errorResponse($validator->messages(), Response::HTTP_UNAUTHORIZED);
             // return response()->json(['error' => $validator->messages()], Response::HTTP_OK);
         }
-
-
 
         try {
 
@@ -120,4 +121,38 @@ class UserController extends ApiController
             return $this->errorResponse($th->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
+
+    // public function forgotPassword(Request $request)
+    // {
+    //     $request->validate(
+    //         [
+    //             'email' => 'required|email',
+    //             'password' => 'required|min:5'
+    //         ],
+    //         [
+    //             'email.required' => 'Email harus diisi',
+    //             'email.email' => 'Data yang dimasukkan bukan email',
+    //             'password.required' => 'Password harus diisi',
+    //             'password.min' => 'Password minimal 5 karakter'
+    //         ]
+    //     );
+
+    //     $status = Password::reset(
+    //         $request->only('email', 'password', 'password_confirmation'),
+    //         function ($user, $password) {
+    //             $user->forceFill([
+    //                 'password' => bcrypt($password)
+    //             ])->setRememberToken(Str::random(60));
+
+    //             $user->save();
+
+    //             event(new PasswordReset($user));
+    //         }
+    //     );
+
+    //     return $status === Password::PASSWORD_RESET
+    //         ? $this->successResponse(__($status), 'Password berhasil diubah')
+    //         : $this->errorResponse(__($status), Response::HTTP_BAD_REQUEST);;
+    // }
+
 }
