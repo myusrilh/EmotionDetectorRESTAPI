@@ -18,9 +18,10 @@ return new class extends Migration
 
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
+
+            $table->foreign('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -31,6 +32,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('doctors', function (Blueprint $table) {
+            $table->dropForeign('doctors_user_id_foreign');
+        });
         Schema::dropIfExists('doctors');
     }
 };

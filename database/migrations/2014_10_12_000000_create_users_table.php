@@ -17,10 +17,11 @@ return new class extends Migration
             $table->engine = 'InnoDB';
 
             $table->id();
-            $table->string('fullname', 100);
+            $table->string('fullname', 100)->nullable();
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password', 30);
+            $table->text('password');
+            $table->text('profile_picture')->nullable();
             $table->enum('level', ['patient', 'doctor', 'admin']);
             $table->rememberToken();
             $table->timestamps();
